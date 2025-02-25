@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        max_concurrency: [5]
+        index: [0, 1, 2, 3, 4]
+    steps:
+      - run: |
+          echo "MAX_CONCURRENCY=$MAX_CONCURRENCY"
+          echo "INDEX_NUMBER=$INDEX_NUMBER"
+        env:
+          MAX_CONCURRENCY: ${{ matrix.max_concurrency }}
+          INDEX_NUMBER: ${{ matrix.index }}
+
+
